@@ -1,0 +1,305 @@
+Step 1 · HTML5 DocType & Boilerplate
+index.html
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Business Card</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+What?
+
+We are declaring standard HTML5 document metadata, configuring responsive mobile scaling, and linking our external stylesheet.
+
+Where?
+
+In index.html, right at the top inside the <head> tag before any visible elements.
+
+How?
+
+By setting <!DOCTYPE html> for modern standards mode, the viewport meta tag for device width parity, and a <link rel="stylesheet"> element pointing to style.css.
+
+Why?
+
+Without the DOCTYPE declaration, the browser defaults to Quirks Mode, and without the viewport meta tag, mobile screens will emulate a desktop viewport and scale the card down unreadably.
+
+Step 2 · Card Container & Profile Header
+index.html
+
+HTML
+<body>
+  <div class="card">
+    <div class="avatar">JD</div>
+    <h1 class="name">Jane Doe</h1>
+    <p class="title">Product Designer</p>
+    <p class="bio">Crafting clean, accessible, and user-centric digital experiences.</p>
+What?
+
+We are setting up the main card shell and personal branding hierarchy: avatar initials badge, owner name, job role, and professional summary.
+
+Where?
+
+At the top of the <body> inside a centered .card wrapper container.
+
+How?
+
+By nesting an initials badge container, a semantic <h1> for the primary entity name, and <p> elements with specific class names (.title, .bio) for targeted styling.
+
+Why?
+
+Using semantic headings ensures assistive technologies read the cardholder's name as the primary title of the document, establishing an immediate visual and accessibility hierarchy.
+
+Step 3 · Contact Details List & Document Close
+index.html
+
+HTML
+    <ul class="contact-list">
+      <li class="contact-item">
+        <span class="label">Email</span>
+        <a href="mailto:jane.doe@example.com">jane.doe@example.com</a>
+      </li>
+      <li class="contact-item">
+        <span class="label">Phone</span>
+        <a href="tel:+1234567890">+1 (555) 019-2834</a>
+      </li>
+      <li class="contact-item">
+        <span class="label">Web</span>
+        <a href="https://janedoe.design" target="_blank" rel="noopener">janedoe.design</a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
+What?
+
+We are constructing an accessible, structured contact list for communication channels and closing out the HTML document.
+
+Where?
+
+Directly below the .bio paragraph, completing the inner contents of .card before closing </body> and </html>.
+
+How?
+
+By using an unordered list (<ul>) populated with labeled list items (<li>) containing actionable URI protocols (mailto:, tel:, and external web URL with target="_blank" and rel="noopener").
+
+Why?
+
+Semantic list elements allow screen readers to inform users of the exact item count, while active URI protocols (mailto:, tel:) launch native mail and phone clients on user click.
+
+Step 4 · CSS Design Tokens, Global Reset & Viewport Centering
+style.css
+
+CSS
+:root {
+  --bg-page: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --accent: #2563eb;
+  --border-color: #e2e8f0;
+  --border-subtle: #f1f5f9;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-page);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  padding: 1.5rem;
+}
+What?
+
+We are establishing CSS color variables, normalizing element dimensions with a universal box reset, and centering the entire layout in the viewport.
+
+Where?
+
+At the very top of style.css inside :root, *, and body rules.
+
+How?
+
+Using display: flex, justify-content: center, and align-items: center alongside min-height: 100vh to anchor the card dead-center on all displays.
+
+Why?
+
+CSS variables maintain color consistency across the codebase, while flexbox viewport centering prevents the card from clinging awkwardly to the top-left corner on wide desktop screens.
+
+Step 5 · Card Shell & Profile Header Styling
+style.css
+
+CSS
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-color);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.title {
+  font-size: 0.95rem;
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.bio {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+What?
+
+We are defining the physical card boundary, circular monogram badge, and typographical rhythm for the owner identity.
+
+Where?
+
+In style.css directly below the body declaration.
+
+How?
+
+Setting max-width: 400px with width: 100% for fluid responsiveness, a 50% border radius on the avatar with flex centering, and disciplined font weights and line heights.
+
+Why?
+
+A constrained card container with defensive padding and subtle drop shadows provides real-world tactile depth, preventing text from stretching excessively on desktop displays.
+
+Step 6 · Structured Metadata & Interactive Link Styling
+style.css
+
+CSS
+.contact-list {
+  list-style: none;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-weight: 600;
+  width: 70px;
+  color: var(--text-muted);
+}
+
+.contact-item a {
+  color: #334155;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.contact-item a:hover {
+  color: var(--accent);
+}
+What?
+
+We are styling the clean, divider-separated contact rows, setting a fixed-width label column, and configuring hover states for links.
+
+Where?
+
+At the end of style.css, finalizing all visual styling rules.
+
+How?
+
+By applying display: flex to each list item with a fixed width: 70px on .label, stripping default bullets with list-style: none, and adding a smooth color transition on a:hover.
+
+Why?
+
+Fixed-width metadata labels create a straight visual vertical alignment for contact values, ensuring high scanability without resorting to complex grid or table markup.
+
+Step 7 · Version Control & Deployment Commands
+What?
+
+Initialize Git version tracking, stage project assets, create a descriptive baseline commit, and publish to a remote GitHub repository.
+
+Where?
+
+In the Integrated Terminal within Visual Studio Code at the root of the project directory.
+
+How?
+
+Execute the following sequential terminal commands:
+
+Bash
+git init
+git add index.html style.css
+git commit -m "feat: assemble and style responsive digital business card component"
+Then use GitHub CLI or the VS Code Source Control panel to publish the branch to a public GitHub repository.
+
+Why?
+
+Establishing clean version tracking captures an immutable history of project files, fulfills task rubric requirements, and produces the public source code URL needed for final evaluation.
+
+Step 8 · Final Testing On-Camera Checklist
+Browser Live Demo
+
+What?
+
+Demonstrating all business card visual layouts and interactive behaviors live in Google Chrome to verify implementation correctness on recording.
+
+Where?
+
+Inside Google Chrome positioned side-by-side with Visual Studio Code.
+
+How?
+
+Execute this 5-point verification sequence on camera:
+
+Viewport Alignment: Confirm the card renders centered vertically and horizontally across the screen.
+
+Typography & Spacing: Inspect the avatar circularity, heading weight, and bottom divider line above the contact section.
+
+Column Scanability: Verify that the "Email", "Phone", and "Web" labels align vertically with even spacing.
+
+Interactive Hover States: Hover the mouse cursor over each contact link to show the smooth color transition change to blue (#2563eb).
+
+Responsive Check: Open Chrome DevTools (Inspect), toggle Device Toolbar (Mobile View), and scale the screen width down to 360px to confirm no horizontal scrollbars appear.
+
+Why?
+
+Systematically testing visual boundaries, active link transitions, and responsive scaling on camera verifies all visual and functional criteria end-to-end without ambiguity.
